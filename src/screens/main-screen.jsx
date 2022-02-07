@@ -3,7 +3,7 @@ import { Box, Center, VStack, HStack, Text, Pressable } from 'native-base'
 import ThemeToggle from '../components/theme-toggle'
 import SortableTable from '../components/sortable-table'
 import { getCoinsMarkets } from '../apis/coins'
-import { MaterialCommunityIcons } from '@expo/vector-icons';
+import { MaterialCommunityIcons } from '@expo/vector-icons'
 
 export default function MainScreen() {
   const [coinList, setCoinList] = useState([])
@@ -41,7 +41,10 @@ export default function MainScreen() {
       } else {
         setCoinList(prevCoinList => {
           data.forEach(coin => {
-            if (prevCoinList.length === 0 || !prevCoinList.find(c => c.id === coin.id)) {
+            if (
+              prevCoinList.length === 0 ||
+              !prevCoinList.find(c => c.id === coin.id)
+            ) {
               prevCoinList.push(coin)
             }
           })
@@ -62,18 +65,18 @@ export default function MainScreen() {
 
   async function setCoinListOrder(order) {
     const isToggleCurrentOrder = order === currentOrder.name
-    if(isToggleCurrentOrder) {
+    if (isToggleCurrentOrder) {
       setCurrentOrder(prevOrder => {
         return {
           ...prevOrder,
-          direction: prevOrder.direction === 'desc' ? 'asc' : 'desc'
+          direction: prevOrder.direction === 'desc' ? 'asc' : 'desc',
         }
       })
     } else {
       setCurrentOrder(prevOrder => {
         return {
           ...prevOrder,
-          name: order
+          name: order,
         }
       })
     }
@@ -81,22 +84,46 @@ export default function MainScreen() {
 
   function _renderListHeader() {
     return (
-      <Box
-        pl="2"
-        pr="3"
-        py="2"
-      >
+      <Box pl="2" pr="3" py="2">
         <HStack space={2} justifyContent="space-between">
           <Pressable onPress={() => setCoinListOrder('gecko')}>
             <HStack width={8} justifyContent="center" alignItems="center">
-              <Text alignSelf="flex-end" fontSize="xs">#</Text>
-              {currentOrder.name === 'gecko' && (currentOrder.direction === 'desc' ? <MaterialCommunityIcons name="arrow-down-thick" size={16} color="blue" /> : <MaterialCommunityIcons name="arrow-up-thick" size={16} color="blue" />)}
+              <Text alignSelf="flex-end" fontSize="xs">
+                #
+              </Text>
+              {currentOrder.name === 'gecko' &&
+                (currentOrder.direction === 'desc' ? (
+                  <MaterialCommunityIcons
+                    name="arrow-down-thick"
+                    size={16}
+                    color="blue"
+                  />
+                ) : (
+                  <MaterialCommunityIcons
+                    name="arrow-up-thick"
+                    size={16}
+                    color="blue"
+                  />
+                ))}
             </HStack>
           </Pressable>
           <Pressable onPress={() => setCoinListOrder('id')}>
             <HStack width={12} justifyContent="center" alignItems="center">
               <Text fontSize="xs">COIN</Text>
-              {currentOrder.name === 'id' && (currentOrder.direction === 'desc' ? <MaterialCommunityIcons name="arrow-down-thick" size={16} color="blue" /> : <MaterialCommunityIcons name="arrow-up-thick" size={16} color="blue" />)}
+              {currentOrder.name === 'id' &&
+                (currentOrder.direction === 'desc' ? (
+                  <MaterialCommunityIcons
+                    name="arrow-down-thick"
+                    size={16}
+                    color="blue"
+                  />
+                ) : (
+                  <MaterialCommunityIcons
+                    name="arrow-up-thick"
+                    size={16}
+                    color="blue"
+                  />
+                ))}
             </HStack>
           </Pressable>
           <Center minW={16}>
@@ -107,13 +134,27 @@ export default function MainScreen() {
           </Center>
           <Pressable onPress={() => setCoinListOrder('market_cap')}>
             <HStack minW={32} justifyContent="flex-end" alignItems="center">
-              <Text alignSelf="flex-end" fontSize="xs">MARKET CAP</Text>
-              {currentOrder.name === 'market_cap' && (currentOrder.direction === 'desc' ? <MaterialCommunityIcons name="arrow-down-thick" size={16} color="blue" /> : <MaterialCommunityIcons name="arrow-up-thick" size={16} color="blue" />)}
+              <Text alignSelf="flex-end" fontSize="xs">
+                MARKET CAP
+              </Text>
+              {currentOrder.name === 'market_cap' &&
+                (currentOrder.direction === 'desc' ? (
+                  <MaterialCommunityIcons
+                    name="arrow-down-thick"
+                    size={16}
+                    color="blue"
+                  />
+                ) : (
+                  <MaterialCommunityIcons
+                    name="arrow-up-thick"
+                    size={16}
+                    color="blue"
+                  />
+                ))}
             </HStack>
           </Pressable>
         </HStack>
       </Box>
-
     )
   }
 

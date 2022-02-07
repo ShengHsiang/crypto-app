@@ -9,11 +9,11 @@ import {
   Avatar,
   Spinner,
 } from 'native-base'
-import { MaterialCommunityIcons } from '@expo/vector-icons';
+import { MaterialCommunityIcons } from '@expo/vector-icons'
 import { RefreshControl } from 'react-native'
 
 function _renderListItem({ item }) {
-  const formatPrice = (price) => {
+  const formatPrice = price => {
     var formatter = new Intl.NumberFormat('en-US', {
       style: 'currency',
       currency: 'USD',
@@ -21,12 +21,12 @@ function _renderListItem({ item }) {
     return formatter.format(price)
   }
 
-  const formatPricePercentage = (price) => {
+  const formatPricePercentage = price => {
     if (!price) return '-'
     return `${price.toFixed(2)}%`
   }
 
-  const formatMarketCap = (marketCap) => {
+  const formatMarketCap = marketCap => {
     var formatter = new Intl.NumberFormat('en-US', {
       style: 'currency',
       currency: 'USD',
@@ -119,7 +119,13 @@ function _renderListFooter() {
   )
 }
 
-function SortableTable({ coinList, fetchNextPage, loading, isRefresh, _renderListHeader }) {
+function SortableTable({
+  coinList,
+  fetchNextPage,
+  loading,
+  isRefresh,
+  _renderListHeader,
+}) {
   function onEndReached() {
     if (loading) return
     fetchNextPage()
