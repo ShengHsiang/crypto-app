@@ -88,9 +88,16 @@ function _renderListItem({ item }) {
             _dark={{
               color: 'warmGray.50',
             }}
-            color="coolGray.800"
+            color={
+              item.price_change_percentage_24h > 0 ? 'green.500' : 'red.500'
+            }
             alignSelf="flex-end"
           >
+            {item.price_change_percentage_24h > 0 ? (
+              <MaterialCommunityIcons name="arrow-up" size={12} color="green" />
+            ) : (
+              <MaterialCommunityIcons name="arrow-down" size={12} color="red" />
+            )}
             {formatPricePercentage(item.price_change_percentage_24h)}
           </Text>
         </Center>

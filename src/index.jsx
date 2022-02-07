@@ -14,7 +14,7 @@ const App = () => {
         overlayColor: '#00000000',
       }}
     >
-      <Drawer.Screen name="Home" component={MainScreen} />
+      <Drawer.Screen name="Cryptocurrency Prices" component={MainScreen} />
     </Drawer.Navigator>
   )
 }
