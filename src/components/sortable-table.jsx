@@ -9,6 +9,8 @@ import {
   Avatar,
   Spinner,
 } from 'native-base'
+import { MaterialCommunityIcons } from '@expo/vector-icons';
+import { RefreshControl } from 'react-native'
 
 function _renderListItem({ item }) {
   const formatPrice = (price) => {
@@ -20,6 +22,7 @@ function _renderListItem({ item }) {
   }
 
   const formatPricePercentage = (price) => {
+    if (!price) return '-'
     return `${price.toFixed(2)}%`
   }
 
@@ -39,12 +42,12 @@ function _renderListItem({ item }) {
         borderColor: 'gray.600',
       }}
       borderColor="coolGray.200"
-      pl="4"
-      pr="5"
+      pl="2"
+      pr="3"
       py="2"
     >
       <HStack space={2} justifyContent="space-between">
-        <Center width={6}>
+        <Center width={8}>
           <Text fontSize="2xs">{item.market_cap_rank}</Text>
         </Center>
         <VStack alignItems="center" width={12}>
@@ -61,6 +64,8 @@ function _renderListItem({ item }) {
             color="coolGray.800"
             bold
             fontSize="2xs"
+            ellipsizeMode="tail"
+            numberOfLines={1}
           >
             {item.symbol.toUpperCase()}
           </Text>
@@ -106,15 +111,15 @@ function _renderListItem({ item }) {
   )
 }
 
-function _renderListFooter () {
-  return(
+function _renderListFooter() {
+  return (
     <Center py={4}>
       <Spinner />
     </Center>
   )
 }
 
-function SortableTable({ coinList, fetchNextPage, loading }) {
+function SortableTable({ coinList, fetchNextPage, loading, isRefresh, _renderListHeader }) {
   function onEndReached() {
     if (loading) return
     fetchNextPage()
@@ -127,7 +132,16 @@ function SortableTable({ coinList, fetchNextPage, loading }) {
       onEndReached={onEndReached}
       onEndReachedThreshold={0.5}
       ListFooterComponent={_renderListFooter}
+      ListHeaderComponent={_renderListHeader}
       renderItem={_renderListItem}
+      refreshing={isRefresh}
+      refreshControl={
+        <RefreshControl
+          refreshing={isRefresh}
+          colors={['#ff0000', '#00ff00', '#0000ff', '#3ad564']}
+          progressBackgroundColor="#ffffff"
+        />
+      }
     />
   )
 }
